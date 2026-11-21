@@ -1,8 +1,30 @@
+# Logs
 *.log
+
+# OS files
 .DS_Store
-.env
-.env.backup
-.env.production
+Thumbs.db
+
+# Local environment files. Keep the safe template in Git.
+/.env
+/.env.*
+!/.env.example
+
+# Local package-manager credentials
+/auth.json
+/.npmrc
+/.netrc
+
+# Private keys and certificate bundles
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+id_ed25519
+id_ecdsa
+
+# Editor and local tool settings
 .phpactor.json
 .phpunit.result.cache
 /.fleet
@@ -11,20 +33,26 @@
 /.phpunit.cache
 /.vscode
 /.zed
-/auth.json
+
+# Dependencies and generated frontend assets
 /node_modules
 /public/build
 /public/hot
+/vendor
+
+# Runtime storage and upload symlink
 /public/storage
 /storage/*.key
 /storage/pail
-/vendor
+
+# Local database files and dumps
+/database/*.sqlite*
+/database/*.db
+/database/*.sql
+/database/*.dump
+/database/*.bak
+/database/*.backup
+
+# Laravel Homestead files
 Homestead.json
 Homestead.yaml
-Thumbs.db
-
-/database/*.sqlite
-/database/*.sqlite3
-
-/database/*.sqlite
-/database/*.sqlite3
