@@ -44,40 +44,40 @@
 
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-b-4 border-green-500 text-center transform hover:-translate-y-1 transition duration-300 min-w-0 flex flex-col items-center justify-center">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 text-green-600 shrink-0">
-                    <i class="{{$kategoriDemografi->icon_1}}"></i>
+                    <i class="{{ $kategoriDemografi?->icon_1 ?? '' }}"></i>
                 </div>
                 <div class="text-xl sm:text-3xl font-bold text-gray-900 mb-1" x-data="{ count: 0 }" x-init="let target = {{ $statistics['kategori_demografi_nama_1'] ?? 0 }}; let step = target / 50; if(target > 0) { setInterval(() => { if(count < target) count += Math.ceil(step); else count = target; }, 20); }">
                     <span x-text="count">0</span>
                 </div>
-                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{$kategoriDemografi->nama_1}}</p>
+                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{ $kategoriDemografi?->nama_1 ?? 'Kategori 1' }}</p>
             </div>
 
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-b-4 border-blue-500 text-center transform hover:-translate-y-1 transition duration-300 min-w-0 flex flex-col items-center justify-center">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 text-blue-600 shrink-0">
-                    <i class="{{$kategoriDemografi->icon_2}}"></i>
+                    <i class="{{ $kategoriDemografi?->icon_2 ?? '' }}"></i>
                 </div>
                 <div class="text-xl sm:text-3xl font-bold text-gray-900 mb-1" x-data="{ count: 0 }" x-init="let target = {{ $statistics['kategori_demografi_nama_2'] ?? 0 }}; let step = target / 50; if(target > 0) { setInterval(() => { if(count < target) count += Math.ceil(step); else count = target; }, 20); }">
                     <span x-text="count">0</span>
                 </div>
-                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{$kategoriDemografi->nama_2}}</p>
+                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{ $kategoriDemografi?->nama_2 ?? 'Kategori 2' }}</p>
             </div>
 
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-b-4 border-yellow-500 text-center transform hover:-translate-y-1 transition duration-300 min-w-0 flex flex-col items-center justify-center">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 text-yellow-600 shrink-0">
-                    <i class="{{$kategoriDemografi->icon_3}}"></i>
+                    <i class="{{ $kategoriDemografi?->icon_3 ?? '' }}"></i>
                 </div>
                 <div class="text-xl sm:text-3xl font-bold text-gray-900 mb-1" x-data="{ count: 0 }" x-init="let target = {{ $statistics['kategori_demografi_nama_3'] ?? 0 }}; let step = 1; if(target > 0) { setInterval(() => { if(count < target) count += step; else count = target; }, 100); }">
                     <span x-text="count">0</span>
                 </div>
-                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{$kategoriDemografi->nama_3}}</p>
+                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{ $kategoriDemografi?->nama_3 ?? 'Kategori 3' }}</p>
             </div>
 
             <div class="bg-white p-4 sm:p-6 rounded-2xl shadow-xl border-b-4 border-purple-500 text-center transform hover:-translate-y-1 transition duration-300 min-w-0 flex flex-col items-center justify-center">
                 <div class="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 text-purple-600 shrink-0">
-                    <i class="{{$kategoriDemografi->icon_4}}"></i>
+                    <i class="{{ $kategoriDemografi?->icon_4 ?? '' }}"></i>
                 </div>
                 <div class="text-xl sm:text-3xl font-bold text-gray-900 mb-1">{{ $statistics['kategori_demografi_nama_4'] ?? 0 }}</div>
-                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{$kategoriDemografi->nama_4}}</p>
+                <p class="text-[10px] sm:text-xs font-bold text-gray-400 uppercase tracking-wider leading-tight">{{ $kategoriDemografi?->nama_4 ?? 'Kategori 4' }}</p>
             </div>
 
         </div>

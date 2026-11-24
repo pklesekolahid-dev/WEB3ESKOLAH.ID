@@ -28,7 +28,7 @@
 
         <p class="text-green-100 text-sm md:text-base max-w-2xl mx-auto leading-relaxed transform transition-all duration-700 delay-200 ease-out translate-y-10 opacity-0"
             :class="loaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            {{ $visiMisi->header_subtitle }}
+            {{ $visiMisi?->header_subtitle ?? 'Informasi visi dan misi belum tersedia.' }}
         </p>
     </div>
 
@@ -50,12 +50,12 @@
                 </svg>
 
                 <h2 class="text-3xl md:text-5xl font-bold text-gray-900 leading-tight relative z-10">
-                    {{ $visiMisi->visi }}
+                    {{ $visiMisi?->visi ?? 'Visi sekolah belum diatur.' }}
                 </h2>
             </div>
 
             <p class="mt-8 text-gray-500 text-base md:text-lg max-w-2xl mx-auto">
-                {{ $visiMisi->visi_subtitle }}
+                {{ $visiMisi?->visi_subtitle ?? '' }}
             </p>
         </div>
     </div>
@@ -70,7 +70,7 @@
 
         <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
 
-            @foreach($visiMisi->misi as $item)
+            @foreach($visiMisi?->misi ?? [] as $item)
             <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm hover:shadow-xl transition duration-300 border-l-4 border-green-500 reveal-on-scroll transform duration-1000 translate-y-10 opacity-0"
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
                 <div class="flex items-start gap-4">
@@ -95,7 +95,7 @@
         :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
         <h2 class="text-2xl font-bold mb-8 uppercase tracking-widest text-green-600">Nilai & Motto Sekolah</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            @foreach($visiMisi->nilai as $data)
+            @foreach($visiMisi?->nilai ?? [] as $data)
             <div class="p-6 bg-gray-50 border border-gray-100 rounded-xl hover:shadow-md hover:border-green-500 hover:bg-white transition duration-300">
                 <h3 class="text-xl font-bold text-gray-900 mb-2">{{ $data['judul'] }}</h3>
                 <p class="text-sm text-gray-500">{{ $data['deskripsi'] }}</p>

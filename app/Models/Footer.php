@@ -26,6 +26,6 @@ class Footer extends Model
 
     public static function instance(): static
     {
-        return static::firstOrCreate(['id' => 1]);
+        return static::firstOrCreate(['id' => 1], ['nama' => '']);
     }
 }

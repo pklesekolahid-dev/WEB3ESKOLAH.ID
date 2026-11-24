@@ -11,17 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('perangkat_desas', function (Blueprint $table) {
+        // This legacy table may not exist in fresh installations.
+        if (Schema::hasTable('perangkat_desas') && !Schema::hasColumn('perangkat_desas', 'tipe')) {
+            Schema::table('perangkat_desas', function (Blueprint $table) {
             // Menambahkan kolom tipe setelah kolom jabatan
             // Default 'Staf Inti' agar data lama tidak error
-            $table->enum('tipe', ['Staf Inti', 'Guru/Walikelas'])->default('Staf Inti')->after('jabatan');
-        });
+                $table->enum('tipe', ['Staf Inti', 'Guru/Walikelas'])->default('Staf Inti')->after('jabatan');
+            });
+        }
     }
 
     public function down(): void
     {
-        Schema::table('perangkat_desas', function (Blueprint $table) {
-            $table->dropColumn('tipe');
-        });
+        if (Schema::hasTable('perangkat_desas') && Schema::hasColumn('perangkat_desas', 'tipe')) {
+            Schema::table('perangkat_desas', function (Blueprint $table) {
+                $table->dropColumn('tipe');
+            });
+        }
     }
 };

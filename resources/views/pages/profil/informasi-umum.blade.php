@@ -63,7 +63,7 @@
 
                     <div class="flex justify-between items-center pt-2">
                         <span class="text-gray-500 font-medium">Jumlah Murid</span>
-                        <span class="font-bold text-green-600 text-right">{{ number_format($statistics['gender_laki']+$statistics['gender_perempuan']) }}</span>
+                        <span class="font-bold text-green-600 text-right">{{ number_format(($statistics['gender_laki'] ?? 0) + ($statistics['gender_perempuan'] ?? 0)) }}</span>
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@
         $cleanPhone = '62' . $cleanPhone;
         }
         $waText = urlencode("Salam Bapak/Ibu, saya ingin bertanya mengenai...");
-        @endphp
+@endphp
 
         <div class="flex flex-col sm:flex-row justify-center gap-4">
             <a href="{{ $cleanPhone ? 'https://wa.me/' . $cleanPhone . '?text=' . $waText : '#' }}" target="_blank"
@@ -187,4 +187,4 @@
         </div>
     </div>
 </section>
-@endsectionx`
+@endsection

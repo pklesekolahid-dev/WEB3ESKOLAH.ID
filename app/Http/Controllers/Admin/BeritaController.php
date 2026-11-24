@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Berita;
 use App\Models\KategoriBerita;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
@@ -36,12 +36,7 @@ class BeritaController extends Controller
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048', // Max 2MB
         ]);
 
-        // Upload Gambar
-        if ($request->hasFile('gambar')) {
-            $file = $request->file('gambar');
-            $gambarPath = 'berita_folder/gambar_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move('berita_folder', $gambarPath);
-        }
+        $gambarPath = $this->storeGambar($request->file('gambar'));
 
         Berita::create([
             'judul' => $request->judul,
@@ -86,24 +81,17 @@ class BeritaController extends Controller
             'kategori_berita_id' => $request->kategori_berita_id,
         ];
 
-        // Jika ada upload gambar baru
-        $beritaPath = $berita->gambar ?? null;
+        $oldGambarPath = null;
 
         if ($request->hasFile('gambar')) {
-            if ($berita && $berita->gambar) {
-                // Hapus gambar lama
-                unlink($berita->gambar);
-            }
-
-            $file = $request->file('gambar');
-            $beritaPath = 'berita_folder/gambar_' . time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move('berita_folder', $beritaPath);
-
-            $data['gambar'] = $beritaPath;
+            $newGambarPath = $this->storeGambar($request->file('gambar'));
+            $oldGambarPath = $berita->gambar;
+            $data['gambar'] = $newGambarPath;
         }
 
         // 3. Eksekusi Update
         $berita->update($data);
+        $this->deleteGambar($oldGambarPath);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil diperbarui!');
     }
@@ -113,13 +101,38 @@ class BeritaController extends Controller
     {
         $berita = Berita::findOrFail($id);
 
-        // Hapus file gambar dari penyimpanan
-        if ($berita && $berita->gambar) {
-            unlink($berita->gambar);
-        }
-
+        $gambarPath = $berita->gambar;
         $berita->delete();
+        $this->deleteGambar($gambarPath);
 
         return redirect()->route('admin.berita.index')->with('success', 'Berita berhasil dihapus!');
+    }
+
+    private function storeGambar(UploadedFile $file): string
+    {
+        $directory = public_path('berita_folder');
+
+        if (! is_dir($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $filename = 'gambar_'.Str::uuid().'.'.$file->getClientOriginalExtension();
+        $file->move($directory, $filename);
+
+        return 'berita_folder/'.$filename;
+    }
+
+    private function deleteGambar(?string $path): void
+    {
+        if (! $path) {
+            return;
+        }
+
+        $filename = basename(str_replace('\\', '/', $path));
+        $absolutePath = public_path('berita_folder/'.$filename);
+
+        if (is_file($absolutePath)) {
+            unlink($absolutePath);
+        }
     }
 }

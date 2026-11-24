@@ -204,7 +204,9 @@ Route::get('/panel-login', function () {
     return view('auth.login');
 })->name('login')->middleware('guest');
 
-Route::post('/panel-login', [LoginController::class, 'authenticate'])->name('login.process');
+Route::post('/panel-login', [LoginController::class, 'authenticate'])
+    ->middleware('throttle:5,1')
+    ->name('login.process');
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('auth');
 
 /*

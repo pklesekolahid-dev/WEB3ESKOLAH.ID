@@ -160,7 +160,7 @@
                 <div>
                     <h3 class="font-bold text-lg mb-6 text-white border-b border-gray-700 pb-2">Jam Pelayanan</h3>
                     <ul class="space-y-3">
-                        @foreach(footer('jam') as $jam)
+                        @foreach(footer('jam') ?? [] as $jam)
                         <li class="flex justify-between items-center text-sm">
                             <span class="text-gray-400">{{ $jam['hari'] }}</span>
                             @if($jam['waktu'] == 'Tutup' || $jam['waktu'] == 'tutup')
@@ -179,7 +179,7 @@
                 <div>
                     <h3 class="font-bold text-lg mb-6 text-white">Jelajahi</h3>
                     <ul class="space-y-4 text-gray-400">
-                        @foreach(footer('menu') as $menu)
+                        @foreach(footer('menu') ?? [] as $menu)
                         <li><a href="{{ $menu['url'] }}" class="hover:text-green-500 transition">
                                 {{ $menu['label'] }}
                             </a></li>
@@ -190,7 +190,7 @@
                 <div>
                     <h3 class="font-bold text-lg mb-6 text-white">Kontak Sekolah</h3>
                     <ul class="space-y-4 text-gray-400">
-                        @foreach(footer('kontak') as $kontak)
+                        @foreach(footer('kontak') ?? [] as $kontak)
                         <li class="flex gap-3">
                             <i class="{{ $kontak['icon'] }} text-green-500"></i>
                             {{ $kontak['nilai'] }}

@@ -28,7 +28,7 @@
 
         <p class="text-green-100 text-sm md:text-base max-w-2xl mx-auto leading-relaxed transform transition-all duration-700 delay-200 ease-out translate-y-10 opacity-0"
             :class="loaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            {{ $sejarah->hero_desc }}
+            {{ $sejarah?->hero_desc ?? '' }}
         </p>
     </div>
 
@@ -48,23 +48,23 @@
                 <div class="absolute inset-0 bg-green-600 rounded-2xl transform rotate-3 scale-100 opacity-20"></div>
 
                 <div class="relative rounded-2xl overflow-hidden shadow-2xl group">
-                    <img src="{{ asset($sejarah->hero_img) }}"
+                    <img src="{{ asset($sejarah?->hero_img ?? '') }}"
                         alt="Sejarah Sekolah"
                         class="w-full h-[300px] md:h-[500px] object-cover transition duration-700 group-hover:scale-105 filter sepia-[.3]">
 
                     <div class="absolute bottom-0 left-0 bg-gradient-to-t from-black/80 to-transparent p-6 w-full">
-                        <p class="text-white/80 text-sm italic">"{{ $sejarah->hero_caption }}"</p>
+                        <p class="text-white/80 text-sm italic">"{{ $sejarah?->hero_caption ?? '' }}"</p>
                     </div>
                 </div>
             </div>
 
             <div class="reveal-on-scroll transform duration-1000 translate-y-10 opacity-0 delay-200"
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-                <span class="text-green-600 font-bold tracking-wider uppercase text-sm">{{ $sejarah->asal_tag }}</span>
-                <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-6">{{ $sejarah->asal_title }}</h2>
+                <span class="text-green-600 font-bold tracking-wider uppercase text-sm">{{ $sejarah?->asal_tag ?? '' }}</span>
+                <h2 class="text-3xl font-bold text-gray-900 mt-2 mb-6">{{ $sejarah?->asal_title ?? '' }}</h2>
 
                 <div class="space-y-4 text-gray-500 text-base md:text-lg leading-relaxed text-justify">
-                    @foreach($sejarah->paragraf as $item)
+                    @foreach($sejarah?->paragraf ?? [] as $item)
                     <p>{!! $item !!}</p>
                     @endforeach
                 </div>
@@ -74,19 +74,19 @@
     </div>
 </section>
 
-@if(!empty($sejarah->timeline))
+@if(!empty($sejarah?->timeline))
 <section class="py-16 md:py-20 bg-gray-50" x-data="{ shown: false }" x-intersect.threshold.10="shown = true">
     <div class="container mx-auto px-6">
-        @if(!empty($sejarah->timeline))
+        @if(!empty($sejarah?->timeline))
         <section class="py-16 md:py-20 bg-gray-50" x-data="{ shown: false }" x-intersect.threshold.10="shown = true">
             <div class="container mx-auto px-6">
 
                 <div class="text-center mb-12 md:mb-16">
                     <h2 class="text-3xl font-bold text-gray-900">
-                        {{ $sejarah->timeline_title ?? 'Jejak Langkah Sekolah' }}
+                        {{ $sejarah?->timeline_title ?? 'Jejak Langkah Sekolah' }}
                     </h2>
-                    @if($sejarah->timeline_sub)
-                    <p class="text-gray-500 mt-2">{{ $sejarah->timeline_sub }}</p>
+                    @if($sejarah?->timeline_sub)
+                    <p class="text-gray-500 mt-2">{{ $sejarah?->timeline_sub }}</p>
                     @endif
                 </div>
 
@@ -94,7 +94,7 @@
                     <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-1 bg-gray-200 transform -translate-x-1/2"></div>
 
                     <div class="space-y-12">
-                        @foreach($sejarah->timeline as $i => $item)
+                        @foreach($sejarah?->timeline ?? [] as $i => $item)
 
                         @php $isEven = $i % 2 === 0; @endphp
 
@@ -140,23 +140,23 @@
 </section>
 @endif
 
-@if(!empty($sejarah->kepala))
+@if(!empty($sejarah?->kepala))
 <section class="py-16 md:py-20 bg-white" x-data="{ shown: false }" x-intersect.threshold.20="shown = true">
     <div class="container mx-auto px-6">
 
         <div class="text-center mb-12">
             <h2 class="text-3xl font-bold text-gray-900">
-                {{ $sejarah->kepala_title ?? 'Pimpinan Sekolah dari Masa ke Masa' }}
+                {{ $sejarah?->kepala_title ?? 'Pimpinan Sekolah dari Masa ke Masa' }}
             </h2>
-            @if($sejarah->kepala_sub)
-            <p class="text-gray-500 mt-2">{{ $sejarah->kepala_sub }}</p>
+            @if($sejarah?->kepala_sub)
+            <p class="text-gray-500 mt-2">{{ $sejarah?->kepala_sub }}</p>
             @endif
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 transform transition-all duration-1000"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
 
-            @foreach($sejarah->kepala as $kepala)
+            @foreach($sejarah?->kepala ?? [] as $kepala)
             @php $aktif = $kepala['aktif'] ?? false; @endphp
             <div class="text-center group">
                 <div class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full overflow-hidden border-4 shadow-lg mb-4 transition duration-500

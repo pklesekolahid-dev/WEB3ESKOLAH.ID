@@ -184,7 +184,7 @@ $slideImages = $banners->count() > 0
             </span>
             <h2 class="text-3xl font-bold text-gray-800 mb-4">Informasi Sekolah dalam Angka</h2>
             <p class="text-gray-500">
-                Update terkini statistik {{$kategoriDemografi->nama_1}}, {{$kategoriDemografi->nama_2}}, {{$kategoriDemografi->nama_3}}, dan {{$kategoriDemografi->nama_4}}.
+                Update terkini statistik {{ $kategoriDemografi?->nama_1 ?? 'Kategori 1' }}, {{ $kategoriDemografi?->nama_2 ?? 'Kategori 2' }}, {{ $kategoriDemografi?->nama_3 ?? 'Kategori 3' }}, dan {{ $kategoriDemografi?->nama_4 ?? 'Kategori 4' }}.
             </p>
         </div>
 
@@ -194,7 +194,7 @@ $slideImages = $banners->count() > 0
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
                 <div class="flex items-center justify-between mb-4">
                     <div class="bg-green-50 text-green-600 p-3 rounded-lg group-hover:bg-green-600 group-hover:text-white transition">
-                        <i class="{{ $kategoriDemografi->icon_1 }}"></i>
+                        <i class="{{ $kategoriDemografi?->icon_1 ?? '' }}"></i>
                     </div>
                 </div>
                 <h3 class="text-4xl font-bold text-gray-800 mb-1 flex items-baseline gap-1"
@@ -202,14 +202,14 @@ $slideImages = $banners->count() > 0
                     x-effect="if(shown) { let interval = setInterval(() => { if(current < target) { current += Math.ceil(target/40); } else { current = target; clearInterval(interval); } }, 10); }">
                     <span x-text="current.toLocaleString()">0</span>
                 </h3>
-                <p class="text-gray-500 text-sm">{{$kategoriDemografi->nama_1}}</p>
+                <p class="text-gray-500 text-sm">{{ $kategoriDemografi?->nama_1 ?? 'Kategori 1' }}</p>
             </div>
 
             <div class="bg-white w-full rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-blue-500 group reveal-on-scroll transform duration-1000 delay-200"
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
                 <div class="flex items-center justify-between mb-4">
                     <div class="bg-blue-50 text-blue-600 p-3 rounded-lg group-hover:bg-blue-600 group-hover:text-white transition">
-                        <i class="{{ $kategoriDemografi->icon_2 }}"></i>
+                        <i class="{{ $kategoriDemografi?->icon_2 ?? '' }}"></i>
                     </div>
                 </div>
                 <h3 class="text-4xl font-bold text-gray-800 mb-1 flex items-baseline gap-1"
@@ -217,14 +217,14 @@ $slideImages = $banners->count() > 0
                     x-effect="if(shown) { let interval = setInterval(() => { if(current < target) { current += Math.ceil(target/40); } else { current = target; clearInterval(interval); } }, 50); }">
                     <span x-text="current">0</span>
                 </h3>
-                <p class="text-gray-500 text-sm">{{$kategoriDemografi->nama_2}}</p>
+                <p class="text-gray-500 text-sm">{{ $kategoriDemografi?->nama_2 ?? 'Kategori 2' }}</p>
             </div>
 
             <div class="bg-white w-full rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-yellow-500 group reveal-on-scroll transform duration-1000 delay-300"
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
                 <div class="flex items-center justify-between mb-4">
                     <div class="bg-yellow-50 text-yellow-600 p-3 rounded-lg group-hover:bg-yellow-600 group-hover:text-white transition">
-                        <i class="{{ $kategoriDemografi->icon_3 }}"></i>
+                        <i class="{{ $kategoriDemografi?->icon_3 ?? '' }}"></i>
                     </div>
                 </div>
                 <h3 class="text-4xl font-bold text-gray-800 mb-1 flex items-baseline gap-1"
@@ -232,14 +232,14 @@ $slideImages = $banners->count() > 0
                     x-effect="if(shown) { let interval = setInterval(() => { if(current < target) { current += Math.ceil(target/40); } else { current = target; clearInterval(interval); } }, 60); }">
                     <span x-text="current">0</span>
                 </h3>
-                <p class="text-gray-500 text-sm">{{$kategoriDemografi->nama_3}}</p>
+                <p class="text-gray-500 text-sm">{{ $kategoriDemografi?->nama_3 ?? 'Kategori 3' }}</p>
             </div>
 
             <div class="bg-white w-full rounded-2xl p-6 shadow-sm hover:shadow-xl transition duration-300 border-b-4 border-purple-500 group reveal-on-scroll transform duration-1000 delay-500"
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'">
                 <div class="flex items-center justify-between mb-4">
                     <div class="bg-purple-50 text-purple-600 p-3 rounded-lg group-hover:bg-purple-600 group-hover:text-white transition">
-                        <i class="{{ $kategoriDemografi->icon_4 }}"></i>
+                        <i class="{{ $kategoriDemografi?->icon_4 ?? '' }}"></i>
                     </div>
                 </div>
                 <h3 class="text-4xl font-bold text-gray-800 mb-1 flex items-baseline gap-1"
@@ -247,7 +247,7 @@ $slideImages = $banners->count() > 0
                     x-effect="if(shown) { let interval = setInterval(() => { if(current < target) { current += Math.ceil(target/40); } else { current = target; clearInterval(interval); } }, 100); }">
                     <span x-text="current">0</span>
                 </h3>
-                <p class="text-gray-500 text-sm">{{$kategoriDemografi->nama_4}}</p>
+                <p class="text-gray-500 text-sm">{{ $kategoriDemografi?->nama_4 ?? 'Kategori 4' }}</p>
             </div>
 
         </div>
@@ -285,11 +285,11 @@ $slideImages = $banners->count() > 0
                 </div>
 
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-                    {{ $visiMisi->visi }}
+                    {{ $visiMisi?->visi ?? 'Visi sekolah belum diatur.' }}
                 </h2>
 
                 <p class="text-gray-500 mb-8 leading-relaxed italic max-w-2xl mx-auto">
-                    {{ $visiMisi->visi_subtitle }}
+                    {{ $visiMisi?->visi_subtitle ?? 'Silakan lengkapi visi dan misi melalui dashboard admin.' }}
                 </p>
 
                 <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-8 w-full text-left shadow-sm">
@@ -301,7 +301,7 @@ $slideImages = $banners->count() > 0
                     </h4>
 
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-6 gap-x-4">
-                        @foreach($visiMisi->misi as $item)
+                        @foreach($visiMisi?->misi ?? [] as $item)
                         <div class="flex items-start gap-3">
                             <div class="mt-1 bg-green-100 p-2 rounded-full text-green-600 shrink-0">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -91,7 +91,7 @@
         <div class="flex overflow-x-auto pb-8 -mx-4 px-4 snap-x snap-mandatory md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-10 md:overflow-visible md:pb-0 md:mx-0 md:px-0 scrollbar-hide">
 
             @forelse($beritas as $index => $item)
-            <article x-show="(activeFilter === 'Semua' || activeFilter === '{{ $item->kategori->nama }}') && ('{{ strtolower($item->judul) }}'.includes(searchQuery.toLowerCase()))"
+            <article x-show="(activeFilter === 'Semua' || activeFilter === '{{ $item->kategori?->nama ?? 'Umum' }}') && ('{{ strtolower($item->judul) }}'.includes(searchQuery.toLowerCase()))"
                 x-transition:enter="transition ease-out duration-500"
                 x-transition:enter-start="opacity-0 scale-95 translate-y-10"
                 x-transition:enter-end="opacity-100 scale-100 translate-y-0"

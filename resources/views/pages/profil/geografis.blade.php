@@ -28,7 +28,7 @@
 
         <p class="text-green-100 text-sm md:text-base max-w-2xl mx-auto leading-relaxed transform transition-all duration-700 delay-200 ease-out translate-y-10 opacity-0"
             :class="loaded ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            {{ $geografis->hero_desc }}
+            {{ $geografis?->hero_desc ?? '' }}
         </p>
     </div>
 
@@ -47,7 +47,7 @@
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
                 <div class="bg-white p-2 rounded-2xl shadow-xl border border-gray-100">
                     <div class="relative h-[300px] md:h-[400px] rounded-xl overflow-hidden [&>iframe]:w-full [&>iframe]:h-full">
-                        {!! $geografis->maps_embed_url !!}
+                        {!! $geografis?->maps_embed_url ?? '' !!}
                     </div>
                 </div>
                 <p class="text-center text-gray-400 text-xs md:text-sm mt-4 italic">
@@ -57,13 +57,13 @@
 
             <div class="reveal-on-scroll transform duration-1000 translate-y-10 opacity-0 delay-200"
                 :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-                <h2 class="text-3xl font-bold text-gray-900 mb-6">{{ $geografis->maps_caption }}</h2>
+                <h2 class="text-3xl font-bold text-gray-900 mb-6">{{ $geografis?->maps_caption ?? '' }}</h2>
                 <p class="text-gray-500 mb-8 leading-relaxed text-base md:text-lg">
-                    {{ $geografis->letak_desc }}
+                    {{ $geografis?->letak_desc ?? '' }}
                 </p>
 
                 <div class="grid grid-cols-1 gap-4">
-                    @foreach($geografis->batas as $item)
+                    @foreach($geografis?->batas ?? [] as $item)
                     <div class="flex items-center gap-4 bg-gray-50 p-4 rounded-xl border-l-4 border-{{ $item['warna'] }}-500 hover:shadow-md transition">
                         <div class="w-10 h-10 bg-{{ $item['warna'] }}-100 text-{{ $item['warna'] }}-600 rounded-full flex items-center justify-center font-bold shrink-0">{{ $item['singkatan'] }}</div>
                         <div>
@@ -81,11 +81,11 @@
 
 <section class="py-16 md:py-20 bg-green-600 text-white" x-data="{ shown: false }" x-intersect.threshold.20="shown = true">
     <div class="container mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">{{ $geografis->topografi_title }}</h2>
+        <h2 class="text-3xl font-bold text-center mb-12">{{ $geografis?->topografi_title ?? '' }}</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center reveal-on-scroll transform duration-1000 translate-y-10 opacity-0"
             :class="shown ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'">
-            @foreach($geografis->topografi as $item)
+            @foreach($geografis?->topografi ?? [] as $item)
             <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-2xl hover:bg-white/20 transition group">
                 <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition">
                     <i class="{{ $item['icon'] }}"></i>

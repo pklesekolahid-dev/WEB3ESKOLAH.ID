@@ -40,6 +40,9 @@ id_ecdsa
 /public/hot
 /vendor
 
+# Temporary deployment copies and archives
+/deploy-scratch-*/
+
 # Runtime storage and upload symlink
 /public/storage
 /storage/*.key

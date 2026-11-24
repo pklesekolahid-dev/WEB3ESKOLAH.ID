@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 
 class LoginController extends Controller
@@ -33,12 +32,9 @@ class LoginController extends Controller
             return redirect()->intended($dashboardUrl ?: RouteServiceProvider::HOME);
         }
 
-        $user = User::where('email', $credentials['email'])->first();
-        $errorMessage = $user ? 'Kata sandi tidak sesuai.' : 'Email tidak terdaftar.';
-
         // Jika gagal, kembalikan ke login dengan pesan error
         return back()->withErrors([
-            'email' => $errorMessage,
+            'email' => 'Email atau kata sandi tidak sesuai.',
         ])->onlyInput('email');
     }
 
