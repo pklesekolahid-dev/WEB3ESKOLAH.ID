@@ -481,7 +481,12 @@ $slideImages = $banners->count() > 0
                             Chat
                             @endif
                         </span>
-                        <a href="https://wa.me/{{ $item->no_wa }}?text=Halo%20{{ $item->pemilik }},%20saya%20tertarik%20dengan%20{{ $item->nama_usaha }}%20yang%20dilihat%20di%20website%20Sekolah."
+                        @php
+                            $waNumItem = preg_replace('/[^0-9]/', '', $item->no_wa ?? '');
+                            if (str_starts_with($waNumItem, '0')) { $waNumItem = '62' . substr($waNumItem, 1); }
+                            elseif (str_starts_with($waNumItem, '8')) { $waNumItem = '62' . $waNumItem; }
+                        @endphp
+                        <a href="{{ $waNumItem ? 'https://wa.me/' . $waNumItem . '?text=Halo%20' . urlencode($item->pemilik) . ',%20saya%20tertarik%20dengan%20' . urlencode($item->nama_usaha) . '%20yang%20dilihat%20di%20website%20Sekolah.' : '#' }}"
                             target="_blank"
                             class="p-2 bg-green-100 text-green-600 rounded-full hover:bg-[#25D366] hover:text-white transition shadow-sm"
                             title="Hubungi Penjual via WhatsApp">
@@ -524,7 +529,12 @@ $slideImages = $banners->count() > 0
                     Daftarkan produk Anda sekarang di website sekolah secara gratis dan jangkau lebih banyak pembeli secara digital.
                 </p>
             </div>
-            <a href="https://wa.me/{{informasi_umum('kontak_wa')}}?text=Halo%20Admin%20Sekolah%2C%20saya%20ingin%20mendaftarkan%20produk%20saya%20di%20website%20sekolah.%0A%0ANama%20Usaha%3A%20%0APemilik%3A%20%0AKategori%3A%20%0ADeskripsi%3A%20%0A%0AMohon%20bantuannya%20untuk%20diproses.%20Terima%20kasih."
+            @php
+                $adminWa = preg_replace('/[^0-9]/', '', informasi_umum('kontak_wa') ?? '');
+                if (str_starts_with($adminWa, '0')) { $adminWa = '62' . substr($adminWa, 1); }
+                elseif (str_starts_with($adminWa, '8')) { $adminWa = '62' . $adminWa; }
+            @endphp
+            <a href="{{ $adminWa ? 'https://wa.me/' . $adminWa . '?text=Halo%20Admin%20Sekolah%2C%20saya%20ingin%20mendaftarkan%20produk%20saya%20di%20website%20sekolah.%0A%0ANama%20Usaha%3A%20%0APemilik%3A%20%0AKategori%3A%20%0ADeskripsi%3A%20%0A%0AMohon%20bantuannya%20untuk%20diproses.%20Terima%20kasih.' : '#' }}"
                 target="_blank"
                 class="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-6 rounded-xl transition shadow-lg shadow-green-600/20 group">
 
@@ -614,6 +624,8 @@ $slideImages = $banners->count() > 0
             <div class="bg-gray-50 border border-gray-100 rounded-2xl overflow-hidden transition-all duration-300 hover:border-green-200"
                 :class="activeTab === {{ $loop->iteration }} ? 'ring-2 ring-green-500/20 bg-white shadow-md' : ''">
                 <button @click="activeTab === {{ $loop->iteration }} ? activeTab = 0 : activeTab = {{ $loop->iteration }}"
+                    :aria-expanded="activeTab === {{ $loop->iteration }} ? 'true' : 'false'"
+                    :aria-controls="'faq-answer-{{ $loop->iteration }}'"
                     class="flex items-center justify-between w-full p-5 sm:p-6 text-left focus:outline-none">
                     <span class="text-base sm:text-lg font-bold text-gray-900 transition-colors pr-4" :class="activeTab === {{ $loop->iteration }} ? 'text-green-600' : ''">
                         {{ $faq->pertanyaan }}
@@ -626,6 +638,7 @@ $slideImages = $banners->count() > 0
                     </div>
                 </button>
                 <div x-show="activeTab === {{ $loop->iteration }}"
+                    id="faq-answer-{{ $loop->iteration }}"
                     x-transition:enter="transition ease-out duration-200"
                     x-transition:enter-start="opacity-0 -translate-y-2"
                     x-transition:enter-end="opacity-100 translate-y-0"

@@ -98,7 +98,12 @@
                     </div>
 
                     <div class="mt-auto">
-                        <a href="https://wa.me/{{ $produk->no_wa }}?text=Halo%20{{ $produk->pemilik }},%20saya%20tertarik%20dengan%20produk%20*{{ $produk->nama_usaha }}*%20yang%20saya%20lihat%20di%20Website%20Sekolah."
+                        @php
+                            $waNumProduk = preg_replace('/[^0-9]/', '', $produk->no_wa ?? '');
+                            if (str_starts_with($waNumProduk, '0')) { $waNumProduk = '62' . substr($waNumProduk, 1); }
+                            elseif (str_starts_with($waNumProduk, '8')) { $waNumProduk = '62' . $waNumProduk; }
+                        @endphp
+                        <a href="{{ $waNumProduk ? 'https://wa.me/' . $waNumProduk . '?text=Halo%20' . urlencode($produk->pemilik) . ',%20saya%20tertarik%20dengan%20produk%20*' . urlencode($produk->nama_usaha) . '*%20yang%20saya%20lihat%20di%20Website%20Sekolah.' : '#' }}"
                             target="_blank"
                             class="flex items-center justify-center gap-3 w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg shadow-green-600/30 transition-all transform hover:-translate-y-1">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

@@ -58,6 +58,7 @@
                 <button type="button"
                     x-show="searchQuery.length > 0"
                     @click="searchQuery = ''"
+                    aria-label="Hapus pencarian"
                     class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-red-500 transition">
                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
@@ -149,7 +150,12 @@
                                 Detail
                             </a>
 
-                            <a href="https://wa.me/{{ $item->no_wa }}?text=Halo%20{{ $item->pemilik }},%20saya%20tertarik%20dengan%20produk%20*{{ $item->nama_usaha }}*%20yang%20ada%20di%20Website%20Sekolah."
+                            @php
+                                $waNum = preg_replace('/[^0-9]/', '', $item->no_wa ?? '');
+                                if (str_starts_with($waNum, '0')) { $waNum = '62' . substr($waNum, 1); }
+                                elseif (str_starts_with($waNum, '8')) { $waNum = '62' . $waNum; }
+                            @endphp
+                            <a href="{{ $waNum ? 'https://wa.me/' . $waNum . '?text=Halo%20' . urlencode($item->pemilik) . ',%20saya%20tertarik%20dengan%20produk%20*' . urlencode($item->nama_usaha) . '*%20yang%20ada%20di%20Website%20Sekolah.' : '#' }}"
                                 target="_blank"
                                 class="flex-1 sm:flex-none group/btn flex justify-center items-center gap-2 bg-green-50 text-green-700 px-4 py-2.5 rounded-xl hover:bg-green-600 hover:text-white transition-all duration-300 shadow-sm hover:shadow-green-600/30">
                                 <svg class="w-4 h-4 transition-transform group-hover/btn:scale-110" fill="currentColor" viewBox="0 0 24 24">

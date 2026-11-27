@@ -57,6 +57,7 @@
                 <button type="button"
                     x-show="searchQuery.length > 0"
                     @click="searchQuery = ''"
+                    aria-label="Hapus pencarian"
                     class="absolute inset-y-0 right-0 pr-4 flex items-center text-gray-400 hover:text-red-500 transition">
                     <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Statistik Desa')
+@section('title', 'Statistik Sekolah')
 
 @section('content')
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
